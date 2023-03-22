@@ -22,3 +22,6 @@
         <li>Fahrenheit a Kelvin</li>
         <li>Kelvin a Fahrenheit</li>
     </ol>
+
+<b>Notas</b>
+<p>Se inicia desde principal</p>
