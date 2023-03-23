@@ -10,7 +10,7 @@ import Monedas.Yen;
 import Monedas.Won;
 import Monedas.Monedas;
 
-public class funciones_monedas {
+public class funcionesMonedas {
 
     Collection<Monedas> listaMonedas = new ArrayList<>();
     int tipoMoneda;

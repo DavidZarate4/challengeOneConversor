@@ -59,8 +59,8 @@ public class ConversorTemperaturas extends JFrame implements ActionListener {
         if (e.getActionCommand() == "Convertir") {
             try {
                 double cantidadAConvertir = Double.parseDouble(JTtemperatura_a_convertir.getText());
-                funciones_temperaturas valora = new funciones_temperaturas();
-                valora.Valorar_opciones((JCtemperatura.getSelectedIndex()), cantidadAConvertir);
+                funcionesTemperaturas valora = new funcionesTemperaturas();
+                valora.ValorarOpciones((JCtemperatura.getSelectedIndex()), cantidadAConvertir);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Valor no valido");
             }

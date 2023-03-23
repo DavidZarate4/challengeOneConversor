@@ -61,7 +61,7 @@ public class ConversorDivisas extends JFrame implements ActionListener {
         if(e.getActionCommand() == "Convertir"){
             try {
                 double cantidadAConvertir = Double.parseDouble(JTcantidadAConvertir.getText());
-                funciones_monedas valora = new funciones_monedas();
+                funcionesMonedas valora = new funcionesMonedas();
                 valora.Valorar_opciones((JCmonedas.getSelectedIndex()), cantidadAConvertir);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Valor no valido");
