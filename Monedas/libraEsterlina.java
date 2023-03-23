@@ -1,8 +1,8 @@
 package Monedas;
 
-public class libra_esterlina extends Monedas{
+public class libraEsterlina extends Monedas{
     
-    public libra_esterlina(double valor){
+    public libraEsterlina(double valor){
         setNombre("Libras esterlina");
         setValor(valor);
     }

@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 import Monedas.Dolar;
 import Monedas.Euro;
-import Monedas.libra_esterlina;
+import Monedas.libraEsterlina;
 import Monedas.Yen;
 import Monedas.Won;
 import Monedas.Monedas;
@@ -20,7 +20,7 @@ public class funcionesMonedas {
         double[] lista_cambio = { 18.61, 19.69, 22.62, 7.22, 70.06 };
         Monedas dolar = new Dolar(lista_cambio[0]);
         Monedas euro = new Euro(lista_cambio[1]);
-        Monedas libra = new libra_esterlina(lista_cambio[2]);
+        Monedas libra = new libraEsterlina(lista_cambio[2]);
         Monedas yen = new Yen(lista_cambio[3]);
         Monedas won = new Won(lista_cambio[4]);
 
