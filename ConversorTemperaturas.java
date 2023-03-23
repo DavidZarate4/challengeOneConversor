@@ -11,9 +11,9 @@ import java.lang.NumberFormatException;
 public class ConversorTemperaturas extends JFrame implements ActionListener {
 
     JButton JBConvertir, JBRegresar;
-    JTextField JTtemperatura_a_convertir;
-    String[] listaOpciones = { "de ºF a ºC", "de ºC a ºF", "de K a ºC", "de ºC a K", "de ºF a K", "de K a ºF" };
-    JComboBox<String> JCtemperatura;
+    JTextField JtTemperaturaAConvertir, JtCantidadConvertida;
+    String[] listaOpciones = { "Fahrenheit", "Celsius", "Kelvin"};
+    JComboBox<String> JCOpciones1, JCOpciones2;
 
     public ConversorTemperaturas() {
         this.setTitle("Conversor de temperaturas");
@@ -26,43 +26,53 @@ public class ConversorTemperaturas extends JFrame implements ActionListener {
 
     public void Iniciar() {
 
-        JLabel pesosMexicanos = new JLabel("Temperatura:");
-        pesosMexicanos.setBounds(25, 25, 125, 20);
+        JCOpciones1 = new JComboBox<>(listaOpciones);
+        JCOpciones1.setBounds(25, 25, 130, 20);
 
-        JLabel opciones = new JLabel("Opciones:");
-        opciones.setBounds(50, 75, 100, 20);
+        JCOpciones2 = new JComboBox<>(listaOpciones);
+        JCOpciones2.setBounds(25, 75, 130, 20);
 
-        JTtemperatura_a_convertir = new JTextField("");
-        JTtemperatura_a_convertir.setBounds(150, 25, 100, 20);
+        JLabel JL1 = new JLabel("v");
+        JL1.setBounds(50, 50, 100, 20);
 
-        JCtemperatura = new JComboBox<>(listaOpciones);
-        JCtemperatura.setBounds(125, 75, 150, 20);
+        JtTemperaturaAConvertir = new JTextField("");
+        JtTemperaturaAConvertir.setBounds(175, 25, 150, 20);
+
+        JtCantidadConvertida = new JTextField("");
+        JtCantidadConvertida.setBounds(175, 75, 150, 20);
+        JtCantidadConvertida.setEditable(false);
 
         JBConvertir = new JButton("Convertir");
-        JBConvertir.setBounds(50, 125, 100, 20);
+        JBConvertir.setBounds(25, 125, 100, 20);
         JBConvertir.addActionListener(this);
 
         JBRegresar = new JButton("Regresar");
-        JBRegresar.setBounds(175, 125, 100, 20);
+        JBRegresar.setBounds(150, 125, 100, 20);
         JBRegresar.addActionListener(this);
 
-        this.add(pesosMexicanos);
-        this.add(opciones);
-        this.add(JTtemperatura_a_convertir);
-        this.add(JCtemperatura);
+        this.add(JCOpciones1);
+        this.add(JCOpciones2);
+        this.add(JL1);
+        this.add(JtTemperaturaAConvertir);
+        this.add(JtCantidadConvertida);
         this.add(JBConvertir);
         this.add(JBRegresar);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         if (e.getActionCommand() == "Convertir") {
-            try {
-                double cantidadAConvertir = Double.parseDouble(JTtemperatura_a_convertir.getText());
-                funcionesTemperaturas valora = new funcionesTemperaturas();
-                valora.ValorarOpciones((JCtemperatura.getSelectedIndex()), cantidadAConvertir);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Valor no valido");
+            if (JCOpciones1.getSelectedIndex() != JCOpciones2.getSelectedIndex()) {            
+                    try {
+                        double cantidadAConvertir = Double.parseDouble(JtTemperaturaAConvertir.getText());
+                        funcionesTemperaturas valora = new funcionesTemperaturas();
+                        JtCantidadConvertida.setText(Double.toString(valora.ValorarOpciones(JCOpciones1.getSelectedIndex(),JCOpciones2.getSelectedIndex(), cantidadAConvertir)));
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Valor no valido");
+                    }
+            } else {
+                JOptionPane.showMessageDialog(null, "El tipo de temperatura no puede ser el mismo");
             }
         }else{
             this.setVisible(false);

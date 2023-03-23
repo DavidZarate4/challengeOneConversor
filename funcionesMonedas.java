@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.JOptionPane;
-
 import Monedas.Dolar;
 import Monedas.Euro;
 import Monedas.libraEsterlina;
@@ -13,11 +11,11 @@ import Monedas.Monedas;
 public class funcionesMonedas {
 
     Collection<Monedas> listaMonedas = new ArrayList<>();
-    int tipoMoneda;
 
     // Ponemos el cambio de pesos mexicanos a la monedad coorespondiente
-    public void establecer_cambio() {
-        double[] lista_cambio = { 18.61, 19.69, 22.62, 7.22, 70.06 };
+    public void establecerCambio() {
+        //El cambio es del 22/03/2023 a las 10:16pm
+        double[] lista_cambio = { 18.55, 20.22, 22.84, 7.04, 68.91 };
         Monedas dolar = new Dolar(lista_cambio[0]);
         Monedas euro = new Euro(lista_cambio[1]);
         Monedas libra = new libraEsterlina(lista_cambio[2]);
@@ -33,41 +31,29 @@ public class funcionesMonedas {
 
     // Vemos que quiere hacer el usuario y dependiendo de eso se hace la operacion
     // que se quiera
-    public void Valorar_opciones(int object, double valor) {
-        establecer_cambio();
-        boolean control;
-        Monedas conversion;
-
-        // Comporamos el numero que corresponde a las conversiones si se convierte de
-        // pesos a otra moneda es true y si es de otra moneda a pesos es false
-        if (object == 0 || object == 2 || object == 4 || object == 6 || object == 8) {
-            control = true;
+    public String ValorarOpciones(int moneda1, int moneda2, double valor) {
+        establecerCambio();
+        Monedas moneda01, moneda02;
+        double valorEnPesos = 0;
+        String resultado = "";
+        // Pasamos el valor a pesos mexicanos para las operaciones
+        if (moneda1 != 5) {
+            moneda01 = ((ArrayList<Monedas>) listaMonedas).get(moneda1);
+            valorEnPesos = Double.parseDouble(moneda01.regresaAMxn(valor));
         } else {
-            control = false;
+            valorEnPesos = valor;
         }
-
-        // Vemos que tipo de moneda se va a usar para la conversion
-        if (object == 0 || object == 1) {
-            this.tipoMoneda = 0;
-        } else if (object == 2 || object == 3) {
-            this.tipoMoneda = 1;
-        } else if (object == 4 || object == 5) {
-            this.tipoMoneda = 2;
-        } else if (object == 6 || object == 7) {
-            this.tipoMoneda = 3;
-        } else if (object == 8 || object == 9) {
-            this.tipoMoneda = 4;
+        // Ve si va a ser una operacion con pesos mexicanos y decide que operacion va a
+        // ser dependiendo de eso
+        if (moneda1 != 5 && moneda2 != 5) {
+            moneda02 = ((ArrayList<Monedas>) listaMonedas).get(moneda2);
+            resultado = moneda02.convierteADiferentes(valorEnPesos, moneda2);
+        } else if (moneda1 == 5 && moneda2 != 5) {
+            moneda02 = ((ArrayList<Monedas>) listaMonedas).get(moneda2);
+            resultado = moneda02.convierteAMoneda(valorEnPesos);
+        } else if (moneda2 == 5 && moneda1 != 5) {
+            resultado = Double.toString(valorEnPesos);
         }
-
-        // Establecemos el tipo de moneda
-        conversion = ((ArrayList<Monedas>) listaMonedas).get(this.tipoMoneda);
-
-        // Dependiendo de que tipo de moneda y que opcion fue hara una operacion u otra
-        if (!control) {
-            JOptionPane.showMessageDialog(null, "Tienes: $" + (conversion.regresa_a_Mxn(valor)) + " Pesos mexicanos");
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "Tienes: $" + (conversion.convierte_a_moneda(valor)) + " " + conversion.getNombre());
-        }
+        return resultado;
     }
 }

@@ -17,7 +17,9 @@ public abstract class Monedas{
         this.valor = valor;
     }
 
-    public abstract String convierte_a_moneda(double valor_a_convertir);
+    public abstract String convierteAMoneda(double valorAConvertir);
 
-    public abstract String regresa_a_Mxn(double valor_a_convertir);
+    public abstract String regresaAMxn(double valorAConvertir);
+
+    public abstract String convierteADiferentes(double valorAConvertir,int moneda2);
 }
