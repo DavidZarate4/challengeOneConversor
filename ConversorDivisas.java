@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.NumberFormatException;
+import Monedas.funcionesMonedas;
 
 public class ConversorDivisas extends JFrame implements ActionListener {
 
